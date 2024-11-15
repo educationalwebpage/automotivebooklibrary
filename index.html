@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automotive Book Library</title>
+
+    <style>
+        /* Resetting some default styles */
+        body, h1, h2, p, input, button, select, textarea {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fb;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Section */
+        header {
+            background-color: #2d3e50;
+            color: #ffffff;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid #00404d;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        /* Search Bar */
+        .search-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .search-bar {
+            padding: 12px;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 1.2em;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-bar:focus {
+            border-color: #2d3e50;
+        }
+
+        /* Featured Books Section */
+        section {
+            padding: 40px 20px;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            color: #2d3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .book-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        /* Book Card Styling */
+        .book {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .book h2 {
+            font-size: 1.6em;
+            color: #2d3e50;
+            margin-bottom: 15px;
+        }
+
+        .book p {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .book-category {
+            background-color: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 1em;
+            color: #2d3e50;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1.3em;
+            color: #ffcc00;
+        }
+
+        .rating span:hover {
+            cursor: pointer;
+            color: #ff8000;
+        }
+
+        .book button {
+            background-color: #2d3e50;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .book button:hover {
+            background-color: #00404d;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #2d3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 1.1em;
+        }
+
+        /* Form Styling */
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: 40px auto;
+        }
+
+        form label {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        select, textarea, input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        input[type="submit"] {
+            background-color: #2d3e50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #00404d;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Automotive Book Library</h1>
+    <p>Explore the fascinating world of automobiles and mechanics</p>
+</header>
+
+<section class="search-container">
+    <input class="search-bar" type="text" placeholder="Search for books by title, author, or category..." id="searchInput" oninput="searchBooks()">
+</section>
+
+<section>
+    <h2>Featured Books</h2>
+
+    <div class="book-list" id="bookList">
+        <!-- Book 1 -->
+        <div class="book" data-category="Tools">
+            <h2>Basic Tools</h2>
+            <p><strong>Author:</strong> John Doe</p>
+            <p><strong>Description:</strong> This book teaches you about the essential tools every car mechanic uses, from wrenches to screwdrivers. Perfect for beginners and those looking to understand automotive tools.</p>
+            <button onclick="showDetails('Basic Tools')">Read More</button>
+            <div class="book-category">Category: Tools</div>
+            <div class="rating">
+                <span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>
+            </div>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="book" data-category="History">
+            <h2>History of Cars</h2>
+            <p><strong>Author:</strong> Jane Smith</p>
+            <p><strong>Description:</strong> A comprehensive guide to the history of cars, starting from the first invention to the modern electric vehicle. This book offers insights into the evolution of automotive technology.</p>
+            <button onclick="showDetails('History of Cars')">Read More</button>
+            <div class="book-category">Category: History</div>
+            <div class="rating">
+                <span>★</span><span>★</span><span>☆</span><span>☆</span><span>☆</span>
+            </div>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="book" data-category="Parts">
+            <h2>Parts of Cars</h2>
+            <p><strong>Author:</strong> Mark Johnson</p>
+            <p><strong>Description:</strong> Explore the essential components that make up every car, including engines, suspension, and transmission systems. A must-read for those interested in understanding how cars work under the hood.</p>
+            <button onclick="showDetails('Parts of Cars')">Read More</button>
+            <div class="book-category">Category: Parts</div>
+            <div class="rating">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+            </div>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="book" data-category="Engines">
+            <h2>Types of Engines</h2>
+            <p><strong>Author:</strong> Sarah Lee</p>
+            <p><strong>Description:</strong> Discover the various types of engines used in modern cars, from internal combustion to electric motors. This book explains how different engines power cars and their impact on the automotive industry.</p>
+            <button onclick="showDetails('Types of Engines')">Read More</button>
+            <div class="book-category">Category: Engines</div>
+            <div class="rating">
+                <span>★</span><span>★</span><span>★</span><span>★</
